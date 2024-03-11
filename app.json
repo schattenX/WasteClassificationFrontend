@@ -1,26 +1,35 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/manual/manual",
+    "pages/identification/indentification",
     "pages/logs/logs",
     "pages/home/home",
-    "pages/results/results",
-    "pages/manual/manual",
-    "pages/identification/indentification"
+    "pages/results/results"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "生活垃圾自动识别",
-    "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarBackgroundColor": "#00FF7F"
   },
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "索引页"
+        "pagePath": "pages/manual/manual",
+        "text": "指南",
+        "iconPath": "images/icons/manual.png",
+        "selectedIconPath": "images/icons/manual_selected.png"
       },
       {
-        "pagePath": "pages/home/home",
-        "text": "主页"
+        "pagePath": "pages/identification/indentification",
+        "text": "识别",
+        "iconPath": "images/icons/scanning.png",
+        "selectedIconPath": "images/icons/scanning_selected.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志",
+        "iconPath": "images/icons/logs.png",
+        "selectedIconPath": "images/icons/logs_selected.png"
       }
     ]
   },

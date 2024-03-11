@@ -1,4 +1,5 @@
 {
   "usingComponents": {
-  }
+  },
+  "navigationBarTitleText": "识别记录"
 }
