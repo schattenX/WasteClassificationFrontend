@@ -1,0 +1,2 @@
+# WasteClassificationFrontend
+生活垃圾图像识别微信小程序
