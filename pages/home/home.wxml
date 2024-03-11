@@ -1,0 +1,7 @@
+<!--pages/home/home.wxml-->
+
+<button bind:tap="onClickToPing">Ping</button>
+
+<button bind:tap="onClickCheckAllModels">GetAllModels</button>
+
+<button bind:tap="onClickTestPredict">Predict</button>
