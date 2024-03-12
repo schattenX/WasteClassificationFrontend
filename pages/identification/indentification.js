@@ -117,8 +117,11 @@ Page({
 
   },
   /**
-   * 弹出ActionSheet，并提供拍照、从相册选择，该两种接口。
-   * 在选择好图片后，图片发送给后端，并保存后端结果。
+   * 1. 弹出ActionSheet，并提供拍照、从相册选择，该两种接口。
+   * 2. 在选择好图片后，图片发送给后端，并保存后端结果到globalData.tmpDataToResults
+   * 作为与results页面通信的数据接口，和localStorage.resultsLogged，作为与logs页面
+   * 通信的数据接口。
+   * 3. 跳转到results页面，显示结果。
    */
   showPopup() {
     let that = this
@@ -183,6 +186,34 @@ Page({
             sourceType: ['camera'],
             success: (md_res) => {
               that.uploadAndGetResults(md_res.tempFiles[0].tempFilePath)
+                  .then(() => {
+                    wx.getFileSystemManager().saveFile({
+                      tempFilePath: md_res.tempFiles[0].tempFilePath,
+                      success: (res => {
+                        let savedFilePath = res.savedFilePath
+                        // 将数据更新到globalData中
+                        let app = getApp()
+                        app.globalData.tmpDataToPageResults = {
+                          result: that.data.result,
+                          imagePath: savedFilePath
+                        }
+                        // 将数据保存到localStorage，新的结果存在最前面
+                        let resultsLogged = wx.getStorageSync('resultsLogged') || []
+                        let tmp = {
+                          date: Date.now(),
+                          result: that.data.result,
+                          imagePath: savedFilePath
+                        }
+                        resultsLogged.unshift(tmp)
+                        wx.setStorageSync('resultsLogged', resultsLogged)
+
+                        // 跳转到results界面
+                        wx.navigateTo({
+                          url: '../results/results',
+                        })
+                      })
+                    })
+                  })
             }
           })
         }

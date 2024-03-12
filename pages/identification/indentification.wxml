@@ -1,4 +1,16 @@
-<van-image height="100" 
-  width="100" 
-  src="/images/identification/camera.png"
-  bind:click="showPopup"/>
+
+
+<view class="page">
+  <view class="explaination">
+    <view class="text1">使用说明</view>
+    <view class="text2">1. 点击下方相机从相册或拍照上传图片进行识别</view>
+    <view class="text3">2. 在日志页面点击列表元素查看往期识别结果</view>
+  </view>
+  <view class="imgArea">
+    <van-image height="100" 
+    width="100" 
+    src="/images/identification/camera.png"
+    bind:click="showPopup"/>
+    <view>拍照识别</view>
+  </view>
+</view>
