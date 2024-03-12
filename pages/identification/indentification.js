@@ -19,14 +19,15 @@ Page({
     result: {
       '主类': null,
       '子类': null,
-      '概率': null
+      '概率': null,
+      '图片地址': null
     },
 
     // # 翻译表：将英文结果翻译为中文
     translationTable: {
       'R': '可回收垃圾',
       'H': '有害垃圾',
-      'K': '厨余垃圾',
+      'F': '厨余垃圾',
       'O': '其他垃圾',
       'Bags': '包',
       'Cans': '易拉罐',
@@ -40,7 +41,24 @@ Page({
       'Shoes': '鞋',
       'ToothBrush': '牙刷',
       'Towels': '毛巾',
-      'VaccumBottles': '保温杯'
+      'VaccumBottles': '保温杯',
+      'Batteries': '电池',
+      'Bulbs': '电灯',
+      'MedicalThermometer': '水银体温计',
+      'PesticideContainers': '杀虫剂',
+      'TabletsPills': '药品',
+      'Xray': 'X光片',
+      'Bones': '剩骨头',
+      'Eggs': '鸡蛋',
+      'FruitRinds': '果皮',
+      'Leftovers': '残羹剩饭',
+      'Tealeaves': '茶叶渣',
+      'CigaretteButts': '烟蒂',
+      'DisposableFoodContainers': '一次性餐盒',
+      'MedicalFaceMasks': '医用口罩',
+      'Napkin': '餐巾纸',
+      'Pen': '笔',
+      'ToothPick': '牙签'
     }
   },
 
@@ -122,8 +140,10 @@ Page({
             sourceType: ['album'],
             success: (img_res) => {
               console.log(img_res)
-              // 以下书写调用图像识别模块，并保存识别结果
+              // 调用图像识别模块，并保存识别结果
               that.uploadAndGetResults(img_res.tempFiles[0].tempFilePath)
+              // 将用户上传的图像保存在小程序私有文件存储区中，并记录图片路径到result
+              // wx.saveFile
             },
             fail: (img_res) => {
               console.log(img_res.errMsg)
@@ -136,7 +156,7 @@ Page({
             mediaType: ['image'],
             sourceType: ['camera'],
             success: (md_res) => {
-              console.log(md_res)
+              that.uploadAndGetResults(md_res.tempFiles[0].tempFilePath)
             }
           })
         }
@@ -157,9 +177,7 @@ Page({
     let that = this
     PREDICTION.predict(filePath)
               .then(res => {
-                // 将推理结果保存在results中
-                that.setData({ results: res})
-                console.log(that.data.results)
+                // 格式化推理结果
                 that.processRawPredictions(res)
               })
   },
