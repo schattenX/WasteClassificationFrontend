@@ -1,2 +1,13 @@
 <!--pages/results/results.wxml-->
-<text>pages/results/results.wxml</text>
+<view class="page">
+  <!-- 图片显示区域 -->
+  <view class="imgArea">
+    <image class="img" mode="{{mode}}" src="{{src}}" />
+  </view>
+  <!-- 推理结果显示区域 -->
+  <view class="resArea">
+    <view class="fonts majorCategory">主类：{{majorCategory}}</view>
+    <view class="fonts subCategory">子类：{{subCategory}}</view>
+    <view class="fonts probability">概率：{{probability}}</view>
+  </view>
+</view>

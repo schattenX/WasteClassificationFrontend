@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    mode: null,
+    src: '../../images/test/vaccum_bottle.jpg',
+    majorCategory: '可回收垃圾',
+    subCategory: '保温杯',
+    probability: 0.7111
   },
 
   /**

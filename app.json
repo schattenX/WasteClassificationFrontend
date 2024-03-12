@@ -30,6 +30,10 @@
         "text": "日志",
         "iconPath": "images/icons/logs.png",
         "selectedIconPath": "images/icons/logs_selected.png"
+      },
+      {
+        "pagePath": "pages/results/results",
+        "text": "结果"
       }
     ]
   },

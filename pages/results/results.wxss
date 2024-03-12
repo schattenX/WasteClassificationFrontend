@@ -1,1 +1,27 @@
 /* pages/results/results.wxss */
+.page {
+  height: 100vh;
+  width: 100%;
+  /* border-style: dashed; */
+  background-color: rgb(242, 242, 242);
+}
+  .imgArea {
+    /* border-style: dotted; */
+    display: flex;
+    box-sizing: border-box;
+    height: 80vh;
+    width: 100%;
+  }
+    .img {
+      height: 100%;
+      width: 100%;
+    }
+  .resArea {
+    height: 20vh;
+    width: 100%;
+    /* border-style: groove; */
+  } 
+    .fonts {
+      font-weight: bolder;
+    }
+
