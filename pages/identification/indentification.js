@@ -153,6 +153,20 @@ Page({
                           result: that.data.result,
                           imagePath: savedFilePath
                         }
+                        // 将数据保存到localStorage，新的结果存在最前面
+                        let resultsLogged = wx.getStorageSync('resultsLogged') || []
+                        let tmp = {
+                          date: Date.now(),
+                          result: that.data.result,
+                          imagePath: savedFilePath
+                        }
+                        resultsLogged.unshift(tmp)
+                        wx.setStorageSync('resultsLogged', resultsLogged)
+
+                        // 跳转到results界面
+                        wx.navigateTo({
+                          url: '../results/results',
+                        })
                       })
                     })
                   })

@@ -1,6 +1,12 @@
 <!--logs.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
-  <block wx:for="{{logs}}" wx:key="timeStamp" wx:for-item="log">
-    <view class="log-item">{{index + 1}}. {{log.date}}</view>
+  <block wx:for="{{resultsLogged}}" wx:key="timeStamp" wx:for-item="record">
+    <view class="eachItem" bind:tap="onClickJumpToResult" data-index="{{index}}">
+      <view >{{index + 1}}、 {{record.date}}</view>
+      <view>主类：{{record.result['主类']}}</view>
+      <view>子类：{{record.result['子类']}}</view>
+      <view>概率：{{record.result['概率']}}</view>
+    </view>
+    
   </block>
 </scroll-view>

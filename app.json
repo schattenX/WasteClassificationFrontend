@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/manual/manual",
     "pages/identification/indentification",
     "pages/logs/logs",
     "pages/home/home",
@@ -14,12 +13,6 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/manual/manual",
-        "text": "科普",
-        "iconPath": "images/icons/manual.png",
-        "selectedIconPath": "images/icons/manual_selected.png"
-      },
-      {
         "pagePath": "pages/identification/indentification",
         "text": "识别",
         "iconPath": "images/icons/scanning.png",
@@ -30,10 +23,6 @@
         "text": "日志",
         "iconPath": "images/icons/logs.png",
         "selectedIconPath": "images/icons/logs_selected.png"
-      },
-      {
-        "pagePath": "pages/results/results",
-        "text": "结果"
       }
     ]
   },

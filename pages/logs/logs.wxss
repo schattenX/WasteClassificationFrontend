@@ -14,3 +14,10 @@ page {
 .log-item:last-child {
   padding-bottom: env(safe-area-inset-bottom);
 }
+
+.eachItem {
+  height: 20vh;
+  width: 100%;
+  border-style: ridge;
+  margin-top: 10px;
+}
