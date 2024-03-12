@@ -28,7 +28,7 @@ const request = (url, method, data, header) => {
 }
 
 const upload = (url, method, filePath, formData) => {
-  let _url = API_BASE_URL + url
+  let _url = PREDICTION_BASE_API + url
   return new Promise((resolve, reject) => {
     wx.uploadFile({
       url: _url,

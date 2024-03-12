@@ -1,11 +1,47 @@
 // pages/identification/indentification.js
+const PREDICTION = require('../wxapi/Prediction')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    // Van-weapp相关的数据
+    show: false,
 
+    // 定义数据
+    actionsMap: {
+      0: '拍照',
+      1: '相册'
+    },
+
+    result: {
+      '主类': null,
+      '子类': null,
+      '概率': null
+    },
+
+    // # 翻译表：将英文结果翻译为中文
+    translationTable: {
+      'R': '可回收垃圾',
+      'H': '有害垃圾',
+      'K': '厨余垃圾',
+      'O': '其他垃圾',
+      'Bags': '包',
+      'Cans': '易拉罐',
+      'Cardboxs': '纸板箱',
+      'Earphones': '耳机',
+      'ExpressPackaings': '快递包装',
+      'GlassBottles': '玻璃瓶',
+      'PlasticBags': '塑料袋',
+      'PlasticBottles': '塑料瓶',
+      'PowerBanks': '充电宝',
+      'Shoes': '鞋',
+      'ToothBrush': '牙刷',
+      'Towels': '毛巾',
+      'VaccumBottles': '保温杯'
+    }
   },
 
   /**
@@ -62,5 +98,103 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  /**
+   * 弹出ActionSheet，并提供拍照、从相册选择，该两种接口。
+   * 在选择好图片后，图片发送给后端，并保存后端结果。
+   */
+  showPopup() {
+    // this.setData({ show: true });
+    let that = this
+    wx.showActionSheet({
+      itemList: ['拍照', '相册'],
+      success: (res) => {
+        // 显示itemList被选中的index
+        console.log(res.tapIndex)
+        // 获取用户点击的action名
+        let actionName = that.data.actionsMap[res.tapIndex]
+        
+        if (actionName == '相册') {
+          // 从相册中选择一个图片
+          wx.chooseMedia({
+            count:1,
+            mediaType: ['iamge'],
+            sourceType: ['album'],
+            success: (img_res) => {
+              console.log(img_res)
+              // 以下书写调用图像识别模块，并保存识别结果
+              that.uploadAndGetResults(img_res.tempFiles[0].tempFilePath)
+            },
+            fail: (img_res) => {
+              console.log(img_res.errMsg)
+            }
+          })
+        }
+        else if (actionName == '拍照') {
+          wx.chooseMedia({
+            count: 1,
+            mediaType: ['image'],
+            sourceType: ['camera'],
+            success: (md_res) => {
+              console.log(md_res)
+            }
+          })
+        }
+      },
+      fail: (res) => {
+        // 显示错误信息
+        console.log(res.errMsg)
+      }
+    })
+  },
+
+  /**
+   * 上传文件，并将推理结果返回
+   * @param {string} filePath 上传的文件路径
+   */
+  uploadAndGetResults(filePath) {
+    // 上传文件
+    let that = this
+    PREDICTION.predict(filePath)
+              .then(res => {
+                // 将推理结果保存在results中
+                that.setData({ results: res})
+                console.log(that.data.results)
+                that.processRawPredictions(res)
+              })
+  },
+
+  /**
+   * 处理TorchServe返回的的结果，将之转换为我们需要的格式
+   * @param {string} rawPrediction TorchServe直接返回的json结果 
+   */
+  processRawPredictions(rawPredictionJson) {
+    // 若输入参数为字符串，则转换为json对象
+    let jsonObject = rawPredictionJson
+    if (typeof jsonObject == 'string') {
+      jsonObject = JSON.parse(rawPredictionJson)
+    }
+    
+    // 获取概率最大的key，第一个为maxKey
+    let maxKey = null
+    for (let key in jsonObject) {
+      maxKey = key
+      break
+    }
+
+    // 将键值对转化为我们需要的格式
+    let [majorCategory, subCategory] = maxKey.split('/')
+    let translationTable = this.data.translationTable
+    this.setData({
+      result: {
+        '主类': translationTable[majorCategory],
+        '子类': translationTable[subCategory],
+        '概率': jsonObject[maxKey]
+      }
+    })
+    
+    // 以下可以调用全局存储模块，把推理结果存储到全局
+    // 方便日志中显示
   }
+
 })

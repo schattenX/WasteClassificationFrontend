@@ -1,0 +1,4 @@
+<van-image height="100" 
+  width="100" 
+  src="/images/identification/camera.png"
+  bind:click="showPopup"/>

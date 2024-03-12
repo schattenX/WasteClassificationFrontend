@@ -15,7 +15,7 @@
     "list": [
       {
         "pagePath": "pages/manual/manual",
-        "text": "指南",
+        "text": "科普",
         "iconPath": "images/icons/manual.png",
         "selectedIconPath": "images/icons/manual_selected.png"
       },
@@ -35,5 +35,9 @@
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "van-image": "@vant/weapp/image/index",
+    "van-popup": "@vant/weapp/popup/index"
+  }
 }

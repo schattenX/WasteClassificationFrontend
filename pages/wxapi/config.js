@@ -6,7 +6,7 @@ const DEFAULT_MODEL = "wastenet4"
 const HEADER_CONTENT_JSON = {
   "Content-Type": "application/json"
 }
-const UPLOAD_TOKEN = "file"
+const UPLOAD_TOKEN = "data"
 
 module.exports = {
   PREDICTION_BASE_API,
