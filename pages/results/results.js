@@ -1,4 +1,5 @@
 // pages/results/results.js
+const GLOBAL_DATA = getApp().globalData
 Page({
 
   /**
@@ -6,31 +7,36 @@ Page({
    */
   data: {
     mode: null,
-    src: '../../images/test/vaccum_bottle.jpg',
-    majorCategory: '可回收垃圾',
-    subCategory: '保温杯',
-    probability: 0.7111
+    src: '../../images/test/wallhaven-q229yr_1920x1080.png',
+    majorCategory: '无',
+    subCategory: '无',
+    probability: 1.0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.setData({
+      src: GLOBAL_DATA.tmpDataToPageResults.imagePath,
+      majorCategory: GLOBAL_DATA.tmpDataToPageResults.result['主类'],
+      subCategory: GLOBAL_DATA.tmpDataToPageResults.result['子类'],
+      probability: GLOBAL_DATA.tmpDataToPageResults.result['概率']
+    })
   },
 
   /**

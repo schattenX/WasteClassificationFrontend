@@ -15,6 +15,14 @@ App({
   },
   globalData: {
     userInfo: null,
-    resultLogs: []
+    // 定义了identification，logs到results页面的数据接口
+    tmpDataToPageResults: {
+      result: {
+        '主类': null,
+        '子类': null,
+        '概率': null
+      },
+      imagePath: null
+    }
   }
 })

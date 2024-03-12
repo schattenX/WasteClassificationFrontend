@@ -1,6 +1,5 @@
 // pages/identification/indentification.js
 const PREDICTION = require('../wxapi/Prediction')
-
 Page({
 
   /**
@@ -122,7 +121,6 @@ Page({
    * 在选择好图片后，图片发送给后端，并保存后端结果。
    */
   showPopup() {
-    // this.setData({ show: true });
     let that = this
     wx.showActionSheet({
       itemList: ['拍照', '相册'],
@@ -142,8 +140,22 @@ Page({
               console.log(img_res)
               // 调用图像识别模块，并保存识别结果
               that.uploadAndGetResults(img_res.tempFiles[0].tempFilePath)
-              // 将用户上传的图像保存在小程序私有文件存储区中，并记录图片路径到result
-              // wx.saveFile
+                  .then(() => {
+                    // 将用户上传的图像保存在小程序私有文件存储区中，并记录图片路径到result
+                    // .then()函数是为了保证同步，因为saveFile和predict是异步的。
+                    wx.getFileSystemManager().saveFile({
+                      tempFilePath: img_res.tempFiles[0].tempFilePath,
+                      success: (res => {
+                        let savedFilePath = res.savedFilePath
+                        // 将数据更新到globalData中
+                        let app = getApp()
+                        app.globalData.tmpDataToPageResults = {
+                          result: that.data.result,
+                          imagePath: savedFilePath
+                        }
+                      })
+                    })
+                  })
             },
             fail: (img_res) => {
               console.log(img_res.errMsg)
@@ -175,7 +187,7 @@ Page({
   uploadAndGetResults(filePath) {
     // 上传文件
     let that = this
-    PREDICTION.predict(filePath)
+    return PREDICTION.predict(filePath)
               .then(res => {
                 // 格式化推理结果
                 that.processRawPredictions(res)
