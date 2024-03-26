@@ -1,5 +1,6 @@
 // pages/results/results.js
 const GLOBAL_DATA = getApp().globalData
+const DEFAULT_IMG_PATH = '../../images/test/数据接口.jpg'
 Page({
 
   /**
@@ -7,10 +8,10 @@ Page({
    */
   data: {
     mode: null,
-    src: '../../images/test/wallhaven-q229yr_1920x1080.png',
-    majorCategory: '无',
-    subCategory: '无',
-    probability: 1.0
+    src: DEFAULT_IMG_PATH,
+    majorCategory: '未知',
+    subCategory: '未知',
+    probability: 0.0
   },
 
   /**
@@ -31,11 +32,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    let imgPath = GLOBAL_DATA.tmpDataToPageResults.imagePath
+    let mCate   = GLOBAL_DATA.tmpDataToPageResults.result['主类']
+    let sCate   = GLOBAL_DATA.tmpDataToPageResults.result['子类']
+    let pro     = GLOBAL_DATA.tmpDataToPageResults.result['概率']
+    if (imgPath == null) 
+      imgPath = DEFAULT_IMG_PATH
+    if (mCate == null)
+      mCate = '未知'
+    if (sCate == null) 
+      sCate = '未知'
+    if (pro == null)
+      pro = 0.0
+    
     this.setData({
-      src: GLOBAL_DATA.tmpDataToPageResults.imagePath,
-      majorCategory: GLOBAL_DATA.tmpDataToPageResults.result['主类'],
-      subCategory: GLOBAL_DATA.tmpDataToPageResults.result['子类'],
-      probability: GLOBAL_DATA.tmpDataToPageResults.result['概率']
+      src: imgPath,
+      majorCategory: mCate,
+      subCategory: sCate,
+      probability: pro
     })
   },
 

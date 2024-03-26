@@ -286,16 +286,29 @@ Page({
       break
     }
 
-    // 将键值对转化为我们需要的格式
-    let [majorCategory, subCategory] = maxKey.split('/')
-    let translationTable = this.data.translationTable
-    this.setData({
-      result: {
-        '主类': translationTable[majorCategory],
-        '子类': translationTable[subCategory],
-        '概率': jsonObject[maxKey]
-      }
-    })
+    if (jsonObject[maxKey] > 0.6) {
+      // 将键值对转化为我们需要的格式
+      let [majorCategory, subCategory] = maxKey.split('/')
+      let translationTable = this.data.translationTable
+      this.setData({
+        result: {
+          '主类': translationTable[majorCategory],
+          '子类': translationTable[subCategory],
+          '概率': jsonObject[maxKey]
+        }
+      })
+    }
+    else {
+      this.setData({
+        result: {
+          '主类': null,
+          '子类': null,
+          '概率': null
+        }
+      })
+    }
+
+    
     
     // 以下可以调用全局存储模块，把推理结果存储到全局
     // 方便日志中显示

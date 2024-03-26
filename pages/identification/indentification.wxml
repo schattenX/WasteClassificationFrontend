@@ -8,7 +8,7 @@
   </view>
   <view class="imgArea">
 
-    <image class="img" src="/images/identification/camera.png" bind:click="showPopup"/>
+    <image class="img" src="/images/identification/camera.png" bind:tap="showPopup"/>
     <view>拍照识别</view>
   </view>
 </view>
