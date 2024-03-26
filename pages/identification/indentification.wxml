@@ -7,10 +7,8 @@
     <view class="text3">2. 在日志页面点击列表元素查看往期识别结果</view>
   </view>
   <view class="imgArea">
-    <van-image height="100" 
-    width="100" 
-    src="/images/identification/camera.png"
-    bind:click="showPopup"/>
+
+    <image class="img" src="/images/identification/camera.png" bind:click="showPopup"/>
     <view>拍照识别</view>
   </view>
 </view>

@@ -276,6 +276,7 @@ Page({
     let jsonObject = rawPredictionJson
     if (typeof jsonObject == 'string') {
       jsonObject = JSON.parse(rawPredictionJson)
+      console.log(jsonObject)
     }
     
     // 获取概率最大的key，第一个为maxKey

@@ -25,3 +25,7 @@
     color:forestgreen;
     font-weight: bolder;
   }
+  .img {
+    height: 100px;
+    width: 100px;
+  }

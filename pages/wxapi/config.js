@@ -1,7 +1,7 @@
 const PREDICTION_BASE_API = "http://localhost:8080/"
 const MANAGEMENT_BASE_API = "http://localhost:8081/"
 const METRICS_BASE_API = "http://localhost:8082/"
-const DEFAULT_MODEL = "wastenet4"
+const DEFAULT_MODEL = "wastenet58"
 
 const HEADER_CONTENT_JSON = {
   "Content-Type": "application/json"

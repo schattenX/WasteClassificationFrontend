@@ -30,7 +30,5 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-    "van-image": "@vant/weapp/image/index",
-    "van-popup": "@vant/weapp/popup/index"
   }
 }
